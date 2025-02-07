@@ -52,10 +52,10 @@ func describeSwim(swimWorkout: Swim) {
 
 //:  Now loop through each workout in `workouts` and, using type casting, call either `describeRun(runningWorkout:)` or `describeSwim(swimmingWorkout:)` on each. Observe what is printed to the console.
 for workout in workouts {
-    if workout is Run {
-        describeRun(runningWorkout: workout as! Run)
-    } else if workout is Swim {
-        describeSwim(swimWorkout: workout as! Swim)
+    if let workout = workout as? Run {
+        describeRun(runningWorkout: workout)
+    } else if let workout = workout as? Swim {
+        describeSwim(swimWorkout: workout)
     }
 }
 

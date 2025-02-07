@@ -34,25 +34,23 @@ let competitors = [stepMaster, activeSitter, monsterWalker]
  At that point, the goal is to assign the user with the higher score to `topCompetitor`. However, the code generates a compiler error because, due to improper variable shadowing, `topCompetitor` has a narrower scope than it should if it is going to be reassigned. Fix the compiler error below and call `getWinner(competitors:)`, passing in the array `competitors`. Print the `name` property of the returned `User` object. You'll know that you fixed the function properly if the user returned is `activeSitter`.
  */
 
-func getWinner(competitors: [User]) -> User? {
+func getWinner(competitors: [User?]) -> User? {
     var topCompetitor: User?
     for competitor in competitors {
-        if topCompetitor != nil {
+        if topCompetitor != nil, let competitor {
             let currentUserSteps = competitor.stepsToday!
             let topCompetitorSteps = topCompetitor?.stepsToday!
             if currentUserSteps > topCompetitorSteps! {
                 topCompetitor = competitor
-        } else {
-            let currentTop: User?
-            topCompetitor = currentTop
-            return topCompetitor
+            } else {
+                topCompetitor = competitor
+            }
         }
-        
     }
+    return topCompetitor
 }
 
 
-}
 getWinner(competitors: competitors)
 //        if let topCompetitor = topCompetitor {
 //            let competitorStepCount = competitor.stepsToday
